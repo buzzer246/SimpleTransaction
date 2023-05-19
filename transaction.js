@@ -76,16 +76,35 @@ var usermobile = 9703104087;
 
 var mobileno = 9703104087;
 
+function getState(){
 
+  let statement = `Account Statement for ${this.name}\n`;
+  statement += '----------------------------------\n';
+  statement += 'Description\t\tAmount\n';
+  statement += '----------------------------------\n';
+
+  for (const transaction of this.transactions) {
+    const sign = transaction.amount >= 0 ? '+' : '-';
+    statement += `${transaction.description}\t\t${sign}${Math.abs(transaction.amount)}\n`;
+  }
+
+  statement += '----------------------------------\n';
+  statement += `Current Balance: ${this.balance}\n`;
+  statement += '----------------------------------\n';
+
+    return statement;
+}
 function displayMobile() {
+
+
+  console.log('Generated OTP:', otp);
 
   if (usermobile == mobileno) {
 
-    console.log('Generated OTP:', otp);
+    console.log('Your Total Amount balance is:'+myAccount.getStatement());
   }
-
 }
-
 console.log("***********************************************");
 
 displayMobile();
+
